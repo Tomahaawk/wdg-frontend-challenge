@@ -1,12 +1,12 @@
 <div class="form-group">
-  <!-- <label>
+  <label>
     <ng-content></ng-content>
   </label>
-  <input
+<!--   <input
     [type]="_type"
     class="form-control"
     [formControl]="ngControl.control"
-  />
+  /> -->
   <div *ngIf="ngControl.hasError('required')">
     (*) Obrigatorio
   </div>
@@ -14,5 +14,5 @@
     <ng-container *ngIf="ngControl.hasError(error.key)">
       <div class="">(*) {{ error.value }}</div>
     </ng-container>
-  </ng-container> -->
+  </ng-container>
 </div>

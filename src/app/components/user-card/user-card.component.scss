@@ -1,0 +1,58 @@
+@import "variables";
+
+.user-card {
+  width: 100%;
+  padding: 0 10px;
+  height: 80px;
+  border-radius: $br4;
+
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+  align-content: center;
+  grid-gap: 15px;
+  background-color: $white;
+  box-shadow: $box-shadow;
+  transition: all 0.3s ease-out;
+  cursor: pointer;
+
+  & > img {
+    height: 64px;
+    width: 64px;
+    object-fit: cover;
+    border-radius: $br4;
+  }
+
+  & > div {
+    align-self: center;
+    overflow: hidden;
+  }
+
+  &__name {
+    color: $main-text;
+    font-weight: $font-bold;
+    font-size: 1.8rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  &__address {
+    color: $default-text;
+    font-size: 1.4rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  &:hover {
+    background-color: #873deb;
+  }
+
+  &:hover & {
+    &__name,
+    &__address {
+      color: $white;
+    }
+  }
+}

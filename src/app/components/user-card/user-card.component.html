@@ -1,0 +1,7 @@
+<div class="user-card" (click)="handleItemClick()">
+  <img [src]="user?.avatar" alt="user Logo" />
+  <div>
+    <div class="user-card__name">{{ user?.first_name }} {{ user?.last_name }}</div>
+    <div class="user-card__address">{{ user?.email }}</div>
+  </div>
+</div>

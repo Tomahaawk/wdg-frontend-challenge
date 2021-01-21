@@ -7,7 +7,7 @@ import { Observable, Subscription } from 'rxjs';
 })
 export class AuthService {
 
-  private _baseUrl: string = 'https://reqres.in/';
+  private _baseUrl: string = 'https://reqres.in/api/';
   private _bearer: string = null;
   private _headers: HttpHeaders = null;
 
@@ -23,12 +23,16 @@ export class AuthService {
   }
 
   authUser(json): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this._baseUrl}api/login?delay=2`, json, { headers: this._headers });
+    return this.http.post<AuthResponse>(`${this._baseUrl}login?delay=2`, json, { headers: this._headers });
   }
 
   saveToken(bearer) {
     this._bearer = bearer;
     this._headers.append('Authorization', `Bearer ${bearer}`)
     localStorage.setItem('currentUser', JSON.stringify({ token: bearer }));
+  }
+
+  get headers(): HttpHeaders {
+    return this._headers;
   }
 }

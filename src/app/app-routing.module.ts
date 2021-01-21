@@ -6,18 +6,24 @@ import { LoggedinGuard } from './guards/loggedin/loggedin.guard';
 
 import { LoginComponent } from './pages/login/login.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { UserDetailsComponent } from './pages/user-details/user-details.component';
 import { UsersComponent } from './pages/users/users.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent, canActivate: [LoggedinGuard] },
-  { path: 'users', component: UsersComponent, canActivate: [AuthGuard]},
+  { path: 'users', component: UsersComponent, canActivate: [AuthGuard] },
+  {
+    path: 'users/:id',
+    component: UserDetailsComponent,
+    canActivate: [AuthGuard],
+  },
   { path: '404', component: NotFoundComponent },
   { path: '**', redirectTo: '/404' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

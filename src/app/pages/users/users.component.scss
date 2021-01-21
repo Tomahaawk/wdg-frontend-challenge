@@ -1,0 +1,11 @@
+.users {
+  display: flex;
+  font-size: 1.6rem;
+
+  &__users-list {
+    display: grid;
+    grid-auto-flow: row;
+    grid-gap: 7px;
+    width: 100%;
+  }
+}

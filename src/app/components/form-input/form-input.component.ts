@@ -24,6 +24,7 @@ export class FormInputComponent implements ControlValueAccessor {
   _type: FieldType;
 
   constructor(@Self() public ngControl: NgControl) {
+    debugger;
     this.ngControl.valueAccessor = this;
     this._type = FieldType.TEXT;
   }

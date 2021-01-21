@@ -1,1 +1,9 @@
-<p>users works!</p>
+<div class="users">
+  <div class="users__list">
+    <user-card
+      *ngFor="let item of users"
+      [user]="item"
+      (select)="navigate(item)"
+    ></user-card>
+  </div>
+</div>

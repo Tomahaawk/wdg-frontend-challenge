@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  toggleLoading() {
+  toggleLoading(): void {
     this.isLoading = !this.isLoading;
   }
 
