@@ -1,5 +1,10 @@
+@import "variables";
+
 .users {
+  height: 100%;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   font-size: 1.6rem;
 
   &__list {
@@ -7,5 +12,36 @@
     grid-auto-flow: row;
     grid-gap: 7px;
     width: 100%;
+    margin-bottom: 1.5rem;
+  }
+
+  &__controls {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    position: relative;
+
+    fa-icon {
+      position: absolute;
+      right: 0;
+      color: $main-text;
+    }
+  }
+
+  &__loading {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    fa-icon {
+      color: $main-text;
+    }
+
+    span {
+      font-size: 1.8rem;
+      color: $main-text;
+    }
   }
 }

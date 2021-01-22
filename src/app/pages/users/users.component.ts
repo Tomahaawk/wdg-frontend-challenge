@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { User } from 'src/app/model/user';
 import { UsersService } from 'src/app/services/users/users.service';
@@ -10,24 +10,52 @@ import { UsersService } from 'src/app/services/users/users.service';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
-  users: User[];
-  currentPage: number = 1;
+  users: User[] = [];
+  currentPage: number;
   totalItems: number;
   itemsPerPage: number;
 
+  loadedPages: number[] = [];
+  loadingPage: boolean = false;
+
   constructor(
-    private usersService: UsersService,
     private router: Router,
-    private userService: UsersService
-  ) {
-    // this.establishmetsService.updateEstablishmentsList();
-  }
+    private activatedRoute: ActivatedRoute,
+    private usersService: UsersService,
+  ) {}
 
   ngOnInit(): void {
-    this.usersService.getUserList().subscribe((response) => {
-      this.users = response.data;
-      this.totalItems = response.total;
+    this.activatedRoute.queryParams.subscribe((params: Params) => {
+      const page = +params.page || 1;
+      if (this.loadedPages.find((p) => p === page)) {
+        this.currentPage = page;
+      } else {
+        this.loadUsers(page);
+      }
+    });
+  }
+
+  loadUsers(page: number) {
+    this.toggleLoadingPage();
+    this.usersService.getUserList(page).subscribe((response) => {
+      if (page > this.currentPage) {
+        this.users = [...this.users, ...response.data];
+      } else {
+        this.users = [...response.data, ...this.users];
+      }
+
+      if (!this.loadedPages.length) {
+        // Since we are using a fake backend, total items is not updated after each request
+        this.totalItems = response.total;
+      }
+
       this.itemsPerPage = response.per_page;
+      this.currentPage = page;
+      this.loadedPages.push(page);
+      this.toggleLoadingPage();
+    }, (err) => {
+      this.toggleLoadingPage()
+      console.log(err);
     });
   }
 
@@ -36,10 +64,24 @@ export class UsersComponent implements OnInit {
   }
 
   handleRemoveUser(user: User) {
+    this.totalItems -= 1;
     this.users = this.users.filter((u) => u.id !== user.id);
   }
 
   handleEditUser(user: User) {
     this.router.navigate(['/users', user.id]);
+  }
+
+  changePage(page: number) {
+    this.router.navigate([], {
+      relativeTo: this.activatedRoute,
+      queryParams: { page },
+      queryParamsHandling: 'merge',
+      replaceUrl: true,
+    });
+  }
+
+  toggleLoadingPage() {
+    this.loadingPage = !this.loadingPage;
   }
 }

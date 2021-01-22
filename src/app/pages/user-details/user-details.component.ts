@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/model/user';
@@ -19,8 +20,8 @@ export class UserDetailsComponent implements OnInit {
   constructor(
     private userService: UsersService,
     private route: ActivatedRoute,
-    private router: Router,
     private fb: FormBuilder,
+    private location: Location,
   ) {}
 
   ngOnInit(): void {
@@ -59,7 +60,7 @@ export class UserDetailsComponent implements OnInit {
         icon: 'error',
         title: 'There was a problem loading this user data.'
       }).then(() => {
-        this.router.navigate(['users']);
+        this.location.back();
       })
     });
   }
@@ -97,7 +98,7 @@ export class UserDetailsComponent implements OnInit {
         Swal.showLoading();
         this.userService.removeUser(this.user.id).subscribe(() => {
           Swal.close();
-          this.router.navigate(['users']);
+          this.location.back();
         }, (err) => {
           console.error(err);
           Swal.close();
@@ -107,6 +108,6 @@ export class UserDetailsComponent implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigate(['users']);
+    this.location.back();
   }
 }

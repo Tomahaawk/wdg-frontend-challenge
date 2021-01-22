@@ -1,10 +1,35 @@
 <div class="users">
-  <div class="users__list">
-    <user-card
-      *ngFor="let item of users"
-      [user]="item"
-      (onRemove)="handleRemoveUser($event)"
-      (onEdit)="handleEditUser($event)"
-    ></user-card>
-  </div>
+  <ng-container *ngIf="loadedPages.length; else spinner">
+    <div class="users__list">
+      <user-card
+        *ngFor="
+          let item of users
+            | paginate
+              : {
+                  itemsPerPage: itemsPerPage,
+                  currentPage: currentPage,
+                  totalItems: totalItems
+                }
+        "
+        [user]="item"
+        (onRemove)="handleRemoveUser($event)"
+        (onEdit)="handleEditUser($event)"
+      ></user-card>
+    </div>
+    <div class="users__controls">
+      <pagination-controls
+        *ngIf="users.length"
+        (pageChange)="changePage($event)"
+        previousLabel=""
+        nextLabel=""
+      ></pagination-controls>
+      <fa-icon *ngIf="loadingPage" [icon]="['fas', 'spinner']" size="1x" [spin]="true"></fa-icon>
+    </div>
+  </ng-container>
+  <ng-template #spinner>
+    <div class="users__loading">
+      <fa-icon [icon]="['fas', 'spinner']" size="2x" [spin]="true"></fa-icon>
+      <span>loading users...</span>
+    </div>
+  </ng-template>
 </div>

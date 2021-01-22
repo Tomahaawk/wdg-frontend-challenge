@@ -7,8 +7,6 @@ import {
   ControlValueAccessor,
   NG_VALUE_ACCESSOR,
 } from '@angular/forms';
-import { FieldType } from 'src/app/enums/field-type.enum';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'form-input',

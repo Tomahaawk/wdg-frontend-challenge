@@ -16,6 +16,7 @@ import { UsersComponent } from './pages/users/users.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { UserDetailsComponent } from './pages/user-details/user-details.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { UserDetailsComponent } from './pages/user-details/user-details.componen
     ReactiveFormsModule,
     HttpClientModule,
     FontAwesomeModule,
+    NgxPaginationModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
