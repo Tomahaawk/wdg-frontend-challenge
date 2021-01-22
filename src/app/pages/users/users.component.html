@@ -3,7 +3,8 @@
     <user-card
       *ngFor="let item of users"
       [user]="item"
-      (select)="navigate(item)"
+      (onRemove)="handleRemoveUser($event)"
+      (onEdit)="handleEditUser($event)"
     ></user-card>
   </div>
 </div>

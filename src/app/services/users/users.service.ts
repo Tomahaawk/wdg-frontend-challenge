@@ -13,7 +13,19 @@ export class UsersService {
   constructor(private authService: AuthService, private http: HttpClient) { }
 
   getUserList(page: number = 1): Observable<UserList> {
-    return this.http.get<UserList>(`${this._baseUrl}users?page=${page}`, { headers: this.authService.headers });
+    return this.http.get<UserList>(`${this._baseUrl}users?delay=2&page=${page}`, { headers: this.authService.headers });
+  }
+
+  removeUser(id: number): Observable<any> {
+    return this.http.delete(`${this._baseUrl}users/${id}?delay=2`, { headers: this.authService.headers });
+  }
+
+  getUserById(id: number): Observable<UserById> {
+    return this.http.get<UserById>(`${this._baseUrl}users/${id}?delay=2`, { headers: this.authService.headers });
+  }
+
+  updateUser(user: User): Observable<User> {
+    return this.http.put<User>(`${this._baseUrl}users/${user.id}?delay=2`, user, { headers: this.authService.headers });
   }
 
 }
@@ -24,4 +36,8 @@ interface UserList {
   per_page: number;
   total: number;
   total_pages: number;
+}
+
+interface UserById {
+  data: User;
 }

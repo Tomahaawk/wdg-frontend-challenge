@@ -1,7 +1,11 @@
-<div class="user-card" (click)="handleItemClick()">
+<div class="user-card">
   <img [src]="user?.avatar" alt="user Logo" />
   <div>
     <div class="user-card__name">{{ user?.first_name }} {{ user?.last_name }}</div>
     <div class="user-card__address">{{ user?.email }}</div>
+  </div>
+  <div class="user-card__actions">
+    <fa-icon class="user-card__actions--edit" [icon]="['fas', 'edit']" (click)="editUser()"></fa-icon>
+    <fa-icon class="user-card__actions--delete" [icon]="['fas', 'trash']" (click)="removeUser()"></fa-icon>
   </div>
 </div>

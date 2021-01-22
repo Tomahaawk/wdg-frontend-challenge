@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faArrowLeft, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faSpinner, faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -41,6 +41,6 @@ import { UserDetailsComponent } from './pages/user-details/user-details.componen
 })
 export class AppModule {
   constructor(library: FaIconLibrary) {
-    library.addIcons(faArrowLeft, faSpinner);
+    library.addIcons(faArrowLeft, faSpinner, faTrash, faEdit);
   }
- }
+}

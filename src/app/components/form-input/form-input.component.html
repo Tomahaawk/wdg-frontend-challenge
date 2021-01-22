@@ -2,16 +2,16 @@
   <label>
     <ng-content></ng-content>
   </label>
-<!--   <input
-    [type]="_type"
+  <input
     class="form-control"
-    [formControl]="ngControl.control"
-  /> -->
-  <div *ngIf="ngControl.hasError('required')">
-    (*) Obrigatorio
-  </div>
+    [type]="_type"
+    [value]="value"
+    [disabled]="disabled"
+    (input)="handleChange($event)"
+    (blur)="onTouched()"
+  />
   <ng-container *ngFor="let error of errorMessages">
-    <ng-container *ngIf="ngControl.hasError(error.key)">
+    <ng-container *ngIf="ngControl?.hasError(error.key)">
       <div class="">(*) {{ error.value }}</div>
     </ng-container>
   </ng-container>

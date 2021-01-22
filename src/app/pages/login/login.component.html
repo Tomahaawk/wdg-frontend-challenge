@@ -9,14 +9,14 @@
       alt="logo"
       class="login__form__logo"
     />
-    <label for="email" class="form-input">
-      Email
-      <input id="email" type="email" formControlName="email" />
-    </label>
-    <label for="password" class="form-input">
-      Password
-      <input id="password" type="password" formControlName="password" />
-    </label>
+      <form-input type="email" formControlName="email" >
+        Email
+      </form-input>
+
+      <form-input type="password" formControlName="password" >
+        Password
+      </form-input>
+
     <div class="login__form__actions">
       <span *ngIf="hasError" class="invalid-login"
         >Invalid username or password</span

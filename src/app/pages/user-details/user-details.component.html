@@ -1,1 +1,43 @@
-<p>user-details works!</p>
+<div class="user-details">
+  <div class="user-details__header">
+    <button (click)="goBack()" type="button">
+      <fa-icon [icon]="['fas', 'arrow-left']" size="2x"></fa-icon>
+    </button>
+  </div>
+  <div class="user-details__avatar">
+    <ng-container *ngIf="!loadingUser; else spinner">
+      <img [src]="user?.avatar" alt="user avatar" />
+      <h2>{{ user?.first_name }} {{ user?.last_name }}</h2>
+    </ng-container>
+    <ng-template #spinner>
+      <fa-icon [icon]="['fas', 'spinner']" size="4x" [spin]="true"></fa-icon>
+    </ng-template>
+  </div>
+  <hr />
+  <form
+    class="form"
+    [formGroup]="userForm"
+    (ngSubmit)="saveUser(userForm.value)"
+  >
+    <div class="form__row">
+      <form-input formControlName="first_name"> First Name </form-input>
+      <form-input formControlName="last_name"> Last Name </form-input>
+      <form-input formControlName="email" [disabled]="true"> Email </form-input>
+    </div>
+    <div class="form__actions">
+      <round-button
+        [type]="'button'"
+        [text]="'Remove'"
+        [disabled]="loading || loadingUser"
+        [class]="'default'"
+        (click)="removeUser()"
+      ></round-button>
+      <round-button
+        [type]="'submit'"
+        [text]="'Save'"
+        [class]="'primary'"
+        [disabled]="userForm.invalid || loading"
+      ></round-button>
+    </div>
+  </form>
+</div>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
+import { AuthResponse } from './types';
 
 @Injectable({
   providedIn: 'root'
@@ -8,17 +9,16 @@ import { Observable, Subscription } from 'rxjs';
 export class AuthService {
 
   private _baseUrl: string = 'https://reqres.in/api/';
-  private _bearer: string = null;
   private _headers: HttpHeaders = null;
 
   constructor(private http: HttpClient) {
-    const token = localStorage.getItem('currentUser');
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this._headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
 
-    if(token) {
-      this._headers.append('Authorization', `Bearer ${token}`)
+    if(currentUser) {
+      this._headers = this._headers.append('Authorization', `Bearer ${currentUser.token}`);
     }
   }
 
@@ -27,8 +27,7 @@ export class AuthService {
   }
 
   saveToken(bearer) {
-    this._bearer = bearer;
-    this._headers.append('Authorization', `Bearer ${bearer}`)
+    this._headers = this._headers.append('Authorization', `Bearer ${bearer}`);
     localStorage.setItem('currentUser', JSON.stringify({ token: bearer }));
   }
 

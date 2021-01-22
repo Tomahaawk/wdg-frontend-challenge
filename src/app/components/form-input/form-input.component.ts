@@ -13,29 +13,47 @@ import { Subject } from 'rxjs';
 @Component({
   selector: 'form-input',
   templateUrl: './form-input.component.html',
-  styleUrls: ['./form-input.component.scss'],
+  styleUrls: ['./form-input.component.scss']
 })
 export class FormInputComponent implements ControlValueAccessor {
   @Input() errorMessages: { key: string; value: string }[] = [];
-  @Input() set type(value: FieldType) {
-    this._type = value || FieldType.TEXT;
+  @Input() set type(value: string) {
+    this._type = value || 'text';
   }
-  _async: boolean = false;
-  _type: FieldType;
+  @Input() disabled: boolean;
 
-  constructor(@Self() public ngControl: NgControl) {
-    debugger;
-    this.ngControl.valueAccessor = this;
-    this._type = FieldType.TEXT;
+  _async: boolean = false;
+  _type: string;
+  value: any = '';
+
+  onChange(...values) {}
+  onTouched(...values) {}
+
+  constructor(@Self() @Optional() public ngControl: NgControl) {
+    if(this.ngControl) {
+      this.ngControl.valueAccessor = this;
+    }
   }
 
   ngOnInit(): void {}
 
-  writeValue(obj: any): void {}
+  handleChange(event: any) {
+    this.onChange(event.target.value);
+  }
 
-  registerOnChange(fn: any): void {}
+  writeValue(value: any): void {
+    this.value = value;
+  }
 
-  registerOnTouched(fn: any): void {}
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
 
-  setDisabledState?(isDisabled: boolean): void {}
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState?(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
 }

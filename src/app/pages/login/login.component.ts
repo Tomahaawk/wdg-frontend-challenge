@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   initForm(): void {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.pattern(Patterns.EMAIL)]],
-      password: ['', [Validators.required]]
+      password: ['', [Validators.required]],
     });
   }
 
@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
   }
 
   authUser(values): void {
+    console.log(values);
     this.hasError = false;
     this.toggleLoading();
 

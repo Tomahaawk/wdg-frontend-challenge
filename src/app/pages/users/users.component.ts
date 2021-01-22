@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import {User} from 'src/app/model/user';
+import { User } from 'src/app/model/user';
 import { UsersService } from 'src/app/services/users/users.service';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss']
+  styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
   users: User[];
@@ -17,13 +17,14 @@ export class UsersComponent implements OnInit {
 
   constructor(
     private usersService: UsersService,
-    private router: Router
+    private router: Router,
+    private userService: UsersService
   ) {
     // this.establishmetsService.updateEstablishmentsList();
   }
 
   ngOnInit(): void {
-    this.usersService.getUserList().subscribe(response => {
+    this.usersService.getUserList().subscribe((response) => {
       this.users = response.data;
       this.totalItems = response.total;
       this.itemsPerPage = response.per_page;
@@ -32,5 +33,13 @@ export class UsersComponent implements OnInit {
 
   navigate(item: User): void {
     this.router.navigate(['/establishment', item.id]);
+  }
+
+  handleRemoveUser(user: User) {
+    this.users = this.users.filter((u) => u.id !== user.id);
+  }
+
+  handleEditUser(user: User) {
+    this.router.navigate(['/users', user.id]);
   }
 }
