@@ -35,7 +35,7 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  loadUsers(page: number) {
+  loadUsers(page: number): void {
     this.toggleLoadingPage();
     this.usersService.getUserList(page).subscribe((response) => {
       if (page > this.currentPage) {
@@ -63,16 +63,16 @@ export class UsersComponent implements OnInit {
     this.router.navigate(['/establishment', item.id]);
   }
 
-  handleRemoveUser(user: User) {
+  handleRemoveUser(user: User): void {
     this.totalItems -= 1;
     this.users = this.users.filter((u) => u.id !== user.id);
   }
 
-  handleEditUser(user: User) {
+  handleEditUser(user: User): void {
     this.router.navigate(['/users', user.id]);
   }
 
-  changePage(page: number) {
+  changePage(page: number): void {
     this.router.navigate([], {
       relativeTo: this.activatedRoute,
       queryParams: { page },
@@ -81,7 +81,7 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  toggleLoadingPage() {
+  toggleLoadingPage(): void {
     this.loadingPage = !this.loadingPage;
   }
 }

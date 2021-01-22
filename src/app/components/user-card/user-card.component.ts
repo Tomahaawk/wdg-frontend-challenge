@@ -18,11 +18,11 @@ export class UserCardComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  editUser() {
+  editUser(): void {
     this.onEdit.emit(this.user);
   }
 
-  removeUser() {
+  removeUser(): void {
     Swal.fire({
       icon: 'warning',
       title: 'Are you sure you want to remove this user?',
@@ -36,7 +36,7 @@ export class UserCardComponent implements OnInit {
           this.onRemove.emit(this.user);
           Swal.close();
         }, err => {
-          console.error(err);
+          console.log(err);
           Swal.close();
         });
       }

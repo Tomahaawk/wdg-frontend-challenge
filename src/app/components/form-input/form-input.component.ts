@@ -35,7 +35,7 @@ export class FormInputComponent implements ControlValueAccessor {
 
   ngOnInit(): void {}
 
-  handleChange(event: any) {
+  handleChange(event: any): void {
     this.onChange(event.target.value);
   }
 

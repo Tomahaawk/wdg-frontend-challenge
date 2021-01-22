@@ -33,7 +33,7 @@ export class RoundButtonComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onClick(event: Event) {
+  onClick(event: Event): void {
     if (!this.disabled) {
       this.click.emit(event);
     }

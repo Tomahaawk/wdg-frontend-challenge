@@ -1,7 +1,8 @@
 @import "variables";
 
 .user-details {
-  padding: 3rem;
+  margin: $content-margin-md;
+  padding: $content-margin-md;
   background-color: $white;
   box-shadow: $box-shadow;
   border-radius: $br4;

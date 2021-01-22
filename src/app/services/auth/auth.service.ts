@@ -26,7 +26,7 @@ export class AuthService {
     return this.http.post<AuthResponse>(`${this._baseUrl}login?delay=2`, json, { headers: this._headers });
   }
 
-  saveToken(bearer) {
+  saveToken(bearer): void {
     this._headers = this._headers.append('Authorization', `Bearer ${bearer}`);
     localStorage.setItem('currentUser', JSON.stringify({ token: bearer }));
   }

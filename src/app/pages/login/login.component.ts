@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Patterns } from 'src/app/utils/patterns';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -37,7 +36,6 @@ export class LoginComponent implements OnInit {
   }
 
   authUser(values): void {
-    console.log(values);
     this.hasError = false;
     this.toggleLoading();
 
