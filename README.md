@@ -1,4 +1,4 @@
-# WDG Automations Front-end Test
+# WDG Automation Front-end Test
 
 ## Running development enviroment
 
@@ -15,4 +15,4 @@
 
 ## Accessing the application
 1. This project is using the `https://reqres.in/` api.
-2. the default authorized user email is `eve.holt@reqres.in`. Use it to login, there is no password validation.
+2. The default authorized user email is `eve.holt@reqres.in`. Use it to login, there is no password validation.
