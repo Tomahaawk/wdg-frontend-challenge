@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/model/user';
 import { UsersService } from 'src/app/services/users/users.service';
 import Swal from 'sweetalert2';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-details',
@@ -53,15 +54,6 @@ export class UserDetailsComponent implements OnInit {
       this.user = response.data;
       this.userForm.patchValue(this.user);
       this.toggleLoadingUser();
-    }, (err) => {
-      this.toggleLoadingUser();
-      console.log(err);
-      Swal.fire({
-        icon: 'error',
-        title: 'There was a problem loading this user data.'
-      }).then(() => {
-        this.location.back();
-      })
     });
   }
 
@@ -82,7 +74,6 @@ export class UserDetailsComponent implements OnInit {
         icon: 'error',
         title: 'There was a problem updating this user.',
       });
-      console.log(err);
     });
   }
 

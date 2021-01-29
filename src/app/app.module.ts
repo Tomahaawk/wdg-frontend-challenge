@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faArrowLeft, faSpinner, faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
@@ -17,6 +17,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { UserDetailsComponent } from './pages/user-details/user-details.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { RequestInterceptor } from './interceptors/request-interceptor';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,13 @@ import { NgxPaginationModule } from 'ngx-pagination';
     FontAwesomeModule,
     NgxPaginationModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestInterceptor,
+      multi: true,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

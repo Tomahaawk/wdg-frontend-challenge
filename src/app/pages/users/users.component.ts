@@ -38,23 +38,38 @@ export class UsersComponent implements OnInit {
   loadUsers(page: number): void {
     this.toggleLoadingPage();
     this.usersService.getUserList(page).subscribe((response) => {
-      if (page > this.currentPage) {
-        this.users = [...this.users, ...response.data];
-      } else {
-        this.users = [...response.data, ...this.users];
-      }
+      // Joberto, after you asked me about the pagination I noticed that the logic below is wrong.
+      // It will only work if the user uses a sequential navigation (1, 2, 3 or 3, 2, 1).
+      // If the user started on page 1 then jumped to page 3 and came back to 2,
+      // page 2 items would be added before page 1, causing wron pagination.
 
+      // if (page > this.currentPage) {
+      //   debugger;
+      //   if(response.total > insertIndex) {
+      //   }
+      // } else {
+      //   this.users = [...response.data, ...this.users];
+      // }
+      // wrong code that was being used above.
+
+      // This is correct, because now I am inserting the items at the start of the index they belong.
       if (!this.loadedPages.length) {
         // Since we are using a fake backend, total items is not updated after each request
         this.totalItems = response.total;
       }
+      const insertIndex = (page - 1) * response.per_page;
+
+      if(response.total >= insertIndex) {
+        this.users.splice(insertIndex, 0, ...response.data);
+        this.currentPage = page;
+        this.loadedPages.push(page);
+      }
 
       this.itemsPerPage = response.per_page;
-      this.currentPage = page;
-      this.loadedPages.push(page);
       this.toggleLoadingPage();
+
     }, (err) => {
-      this.toggleLoadingPage()
+      this.toggleLoadingPage();
       console.log(err);
     });
   }

@@ -2,6 +2,7 @@
 
 .form-group {
   width: 100%;
+
   label {
     font-size: 1.4rem;
     color: $main-text;
@@ -19,9 +20,9 @@
     background-color: $background;
     font-weight: $font-medium;
     border-radius: $br4;
-
-    &.ng-invalid {
-      border-color: red;
-    }
   }
+}
+
+:host.ng-invalid.ng-touched .form-group input {
+  border-color: red;
 }

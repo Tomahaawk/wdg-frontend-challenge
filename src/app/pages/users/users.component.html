@@ -1,5 +1,5 @@
 <div class="users">
-  <ng-container *ngIf="loadedPages.length; else spinner">
+  <ng-container *ngIf="totalItems; else spinner">
     <div class="users__list">
       <user-card
         *ngFor="

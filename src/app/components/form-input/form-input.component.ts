@@ -31,6 +31,7 @@ export class FormInputComponent implements ControlValueAccessor {
     if(this.ngControl) {
       this.ngControl.valueAccessor = this;
     }
+    this._type = 'text';
   }
 
   ngOnInit(): void {}
